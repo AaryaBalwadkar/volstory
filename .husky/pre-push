@@ -1,0 +1,23 @@
+# Get the name of the branch you are trying to push
+branch="$(git symbolic-ref HEAD 2>/dev/null)"
+branch="${branch##refs/heads/}"
+
+# THE GUARDRAIL
+# Block direct pushes to 'main' and 'develop'
+if [ "$branch" = "main" ] || [ "$branch" = "develop" ]; then
+  echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  echo "⛔️  ERROR: DIRECT PUSH TO PROTECTED BRANCH BLOCKED"
+  echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  echo ""
+  echo "You are trying to push directly to '$branch'."
+  echo "We use strict Git Flow."
+  echo ""
+  echo "👉 ACTION REQUIRED:"
+  echo "1. Create a feature branch: git checkout -b feat/your-feature"
+  echo "2. Push that branch instead"
+  echo "3. Open a Pull Request on GitHub"
+  echo ""
+  exit 1
+fi
+
+npm test
