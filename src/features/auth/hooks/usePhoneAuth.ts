@@ -127,7 +127,7 @@ export const usePhoneAuth = () => {
 
       // --- (D) Persistence (Via Store Action) ---
       login({
-        userId: currentUser.uid,
+        userId: backendResponse.userId || currentUser.uid,
         name: currentUser.displayName || "",
         email: currentUser.email || "",
         accessToken: backendResponse.accessToken || "",
