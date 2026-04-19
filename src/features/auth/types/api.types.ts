@@ -11,11 +11,15 @@ export interface SignInResponse {
   /** Long-lived token used to generate short-lived Access Tokens */
   refreshToken: string;
 
+  /** Optional: Backend system user id (MongoDB _id). */
+  userId?: string;
+
   /** * Indicates if the user has completed the registration wizard.
    * * true: User exists and has profile data.
    * * false: User is new and must be redirected to Registration Wizard.
+   * Optional because some backend flows only return tokens/userId.
    */
-  isRegistered: boolean;
+  isRegistered?: boolean;
 
   /** Optional: Short-lived token if backend returns it immediately */
   accessToken?: string;
@@ -65,8 +69,8 @@ export interface CreateAccountRequest {
 }
 
 export interface CreateAccountResponse {
-  /** Returns a new refresh token (session upgrade) */
-  refreshToken: string;
+  /** Optional: Returns a refresh token if the backend rotates session credentials. */
+  refreshToken?: string;
 
   /** Should be true after successful creation */
   isRegistered?: boolean;

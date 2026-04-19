@@ -96,6 +96,8 @@ export const useGoogleAuth = () => {
         clientStorage.setItem("access_token", backendResponse.accessToken);
       }
 
+      const backendUserId = backendResponse.userId || googleUser.uid;
+
       // 3. CHECK STATUS (Heuristic: Phone Number = Registered)
       const isPhoneLinked = !!currentUser.phoneNumber;
 
@@ -145,7 +147,7 @@ export const useGoogleAuth = () => {
       // User clicked "Login" AND they are Existing (Has Phone).
       // Action: Log them in.
       const user: User = {
-        userId: googleUser.uid,
+        userId: backendUserId,
         name: googleUser.displayName || "User",
         email: googleUser.email,
         accessToken: backendResponse.accessToken || "",
