@@ -69,7 +69,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   // --------------------------------------------------------------------
   android: {
     package: getUniqueIdentifier(),
-    googleServicesFile: process.env.GOOGLE_SERVICES_JSON || "./google-services.json",
+    googleServicesFile:
+      process.env.GOOGLE_SERVICES_JSON || "./google-services.json",
     adaptiveIcon: {
       foregroundImage: "./assets/images/logo.png",
       backgroundColor: "#ffffff",
