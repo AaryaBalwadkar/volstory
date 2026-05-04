@@ -81,13 +81,13 @@ export default function OtpScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white px-6">
+    <SafeAreaView className="flex-1 bg-surface px-6">
       <Stack.Screen
         options={{ title: "OTP Verification", headerBackTitle: "Edit" }}
       />
 
       <View className="mx-auto w-full max-w-md flex-1 pt-8">
-        <Text className="mb-2 text-center text-2xl font-bold text-neutral-black">
+        <Text className="mb-2 text-center text-2xl font-bold text-neutral">
           Enter OTP
         </Text>
         <Text className="mb-10 text-center text-base text-neutral-gray">
@@ -110,7 +110,7 @@ export default function OtpScreen() {
           {timer > 0 ? (
             <Text className="text-sm text-neutral-gray">
               Didn&apos;t receive OTP?{" "}
-              <Text className="font-bold text-gray-400">
+              <Text className="font-bold text-neutral-light">
                 Resend in {timer}s
               </Text>
             </Text>

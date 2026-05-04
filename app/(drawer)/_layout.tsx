@@ -1,9 +1,9 @@
 import React from "react";
 import { Drawer } from "expo-router/drawer";
 
-import { Ionicons } from "@expo/vector-icons";
-
+import { colors, fonts } from "@/constants/theme";
 import CustomSidebar from "@/src/components/customDrawer/CustomSidebar";
+import { TabIcon } from "@/src/components/icons/TabIcon";
 import { CustomHeader } from "@/src/components/navigation/CustomHeader";
 
 /**
@@ -35,13 +35,13 @@ const DrawerLayout = () => {
       screenOptions={{
         headerShown: false, // We hide the default drawer header because Tabs have their own
         drawerStyle: {
-          backgroundColor: "#ffffff",
+          backgroundColor: colors.surface.DEFAULT,
           width: 280,
         },
-        drawerActiveTintColor: "#01A39F", // Primary Color
-        drawerInactiveTintColor: "#8E8E93",
+        drawerActiveTintColor: colors.primary.DEFAULT,
+        drawerInactiveTintColor: colors.neutral.light,
         drawerLabelStyle: {
-          fontFamily: "Nunito-Bold",
+          fontFamily: fonts.bold,
           fontSize: 16,
         },
       }}
@@ -53,7 +53,7 @@ const DrawerLayout = () => {
           drawerLabel: "Home",
           title: "Home",
           drawerIcon: ({ color }) => (
-            <Ionicons name="home-outline" size={22} color={color} />
+            <TabIcon name="home" size={22} color={color} />
           ),
         }}
       />
@@ -66,7 +66,7 @@ const DrawerLayout = () => {
           headerShown: true, // Show header for Settings page
           header: () => <CustomHeader />, // Reuse our custom header
           drawerIcon: ({ color }) => (
-            <Ionicons name="settings-outline" size={22} color={color} />
+            <TabIcon name="settings" size={22} color={color} />
           ),
         }}
       />

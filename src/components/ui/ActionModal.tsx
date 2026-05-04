@@ -65,8 +65,8 @@ export const ActionModal = ({
       onRequestClose={onSecondary} // Hardware back button support
     >
       <View className="flex-1 items-center justify-center bg-black/60 px-6">
-        <View className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl">
-          <Text className="mb-3 text-center text-xl font-bold text-neutral-black">
+        <View className="w-full max-w-sm rounded-2xl bg-surface p-6 shadow-xl">
+          <Text className="mb-3 text-center text-xl font-bold text-neutral">
             {title}
           </Text>
 
@@ -79,9 +79,9 @@ export const ActionModal = ({
             accessibilityRole="button"
             onPress={onAction}
             activeOpacity={0.8}
-            className="mb-3 h-12 w-full items-center justify-center rounded-xl bg-teal-600"
+            className="mb-3 h-12 w-full items-center justify-center rounded-xl bg-primary"
           >
-            <Text className="text-base font-bold text-white">
+            <Text className="text-base font-bold text-neutral-white">
               {actionLabel}
             </Text>
           </TouchableOpacity>
@@ -94,7 +94,7 @@ export const ActionModal = ({
               activeOpacity={0.6}
               className="h-12 w-full items-center justify-center rounded-xl"
             >
-              <Text className="text-base font-bold text-teal-600">
+              <Text className="text-base font-bold text-primary">
                 {secondaryLabel}
               </Text>
             </TouchableOpacity>

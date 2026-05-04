@@ -1,54 +1,40 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
+// src/theme/theme.js (or whatever your path is)
 
-import { Platform } from "react-native";
-
-const tintColorLight = "#0a7ea4";
-const tintColorDark = "#fff";
-
-export const Colors = {
-  light: {
-    text: "#11181C",
-    background: "#fff",
-    tint: tintColorLight,
-    icon: "#687076",
-    tabIconDefault: "#687076",
-    tabIconSelected: tintColorLight,
+export const colors = {
+  // --- BRAND COLORS ---
+  primary: {
+    DEFAULT: "#01A39F", // Main Turquoise
+    pressed: "#01726F", // Darker Teal
+    disabled: "#80D1CF", // Lighter Teal
+    surface: "#E1F2F2", // Very light teal
   },
-  dark: {
-    text: "#ECEDEE",
-    background: "#151718",
-    tint: tintColorDark,
-    icon: "#9BA1A6",
-    tabIconDefault: "#9BA1A6",
-    tabIconSelected: tintColorDark,
+
+  // --- NEUTRALS ---
+  neutral: {
+    DEFAULT: "#1C1C1E", // Default text color
+    dark: "#48484A", // Dark Gray
+    gray: "#636366", // Gray
+    light: "#8E8E93", // Light Gray
+    lightest: "#E5E5EA", // Text/Lightest Gray
+    white: "#FFFFFF",
   },
+
+  // --- BACKGROUND SURFACES ---
+  surface: {
+    DEFAULT: "#FFFFFF",
+    gray: "#F2F2F5",
+    yellow: "#F4AF06",
+  },
+
+  // --- FEEDBACK ---
+  error: "#EF4444",
+  success: "#10B981",
 };
 
-export const Fonts = Platform.select({
-  ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
-    sans: "system-ui",
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
-    serif: "ui-serif",
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
-    rounded: "ui-rounded",
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
-    mono: "ui-monospace",
-  },
-  default: {
-    sans: "normal",
-    serif: "serif",
-    rounded: "normal",
-    mono: "monospace",
-  },
-  web: {
-    sans: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-    serif: "Georgia, 'Times New Roman', serif",
-    rounded:
-      "'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif",
-    mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
-  },
-});
+// Exporting your fonts here too, just in case you ever need to use
+// them in a native StyleSheet or Navigation Header!
+export const fonts = {
+  regular: "Nunito-Regular",
+  semibold: "Nunito-SemiBold",
+  bold: "Nunito-Bold",
+};

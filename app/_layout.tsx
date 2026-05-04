@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -10,8 +11,10 @@ import {
   Nunito_700Bold,
   useFonts,
 } from "@expo-google-fonts/nunito";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+import { colors } from "@/constants/theme";
 import { configureGoogleSignIn } from "@/src/config/google";
 import { useAuthStore } from "@/src/features/auth/stores/auth.store";
 
@@ -23,6 +26,11 @@ SplashScreen.preventAutoHideAsync();
 
 // Initialize Query Client once
 const queryClient = new QueryClient();
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+});
 
 /**
  * **Root Layout (Entry Point)**
@@ -57,6 +65,19 @@ export default function RootLayout() {
   useEffect(() => {
     const initAuth = async () => {
       await hydrate();
+
+      // Proactively verify token to trigger background refresh via Axios interceptor if expired.
+      // This guarantees that public endpoints (like GET /stories) don't silently degrade to anonymous
+      // due to an expired token on app launch.
+      try {
+        if (useAuthStore.getState().isAuthenticated) {
+          const { apiClient } = await import("@/src/lib/axios");
+          await apiClient.get("/auth/verify");
+        }
+      } catch (error) {
+        // Interceptor handles the actual logout if the refresh entirely fails.
+      }
+
       setIsAuthReady(true);
     };
     initAuth();
@@ -75,21 +96,25 @@ export default function RootLayout() {
   if (!fontsLoaded || !isAuthReady) {
     return (
       <View className="flex-1 items-center justify-center">
-        <ActivityIndicator size="large" color="#01A39F" />
+        <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
       </View>
     );
   }
 
   // --- 3. RENDER APP ---
   return (
-    <SafeAreaProvider>
-      <QueryClientProvider client={queryClient}>
-        <Stack screenOptions={{ headerShown: false, animation: "fade" }}>
-          <Stack.Screen name="index" />
-          <Stack.Screen name="(auth)" />
-          <Stack.Screen name="(drawer)" />
-        </Stack>
-      </QueryClientProvider>
-    </SafeAreaProvider>
+    <GestureHandlerRootView style={styles.root}>
+      <SafeAreaProvider>
+        <QueryClientProvider client={queryClient}>
+          <BottomSheetModalProvider>
+            <Stack screenOptions={{ headerShown: false, animation: "fade" }}>
+              <Stack.Screen name="index" />
+              <Stack.Screen name="(auth)" />
+              <Stack.Screen name="(drawer)" />
+            </Stack>
+          </BottomSheetModalProvider>
+        </QueryClientProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }

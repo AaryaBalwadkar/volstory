@@ -3,6 +3,7 @@ import { Platform, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack } from "expo-router";
 
+import { colors } from "@/constants/theme";
 // Components
 import { Button } from "@/src/components/ui/Button";
 import {
@@ -44,7 +45,7 @@ export default function PhoneScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white px-6">
+    <SafeAreaView className="flex-1 bg-surface px-6">
       {/* Add Navigation Header 
         We use Stack.Screen to configure the native header, giving us a free "Back" button.
       */}
@@ -77,9 +78,9 @@ export default function PhoneScreen() {
           <TextInput
             accessibilityLabel="Text input field"
             accessibilityHint="Enter your mobile number without the country code"
-            className="h-[52px] flex-1 rounded-xl border border-neutral-light bg-white px-4 text-base text-neutral-black focus:border-primary"
+            className="h-[52px] flex-1 rounded-xl border border-neutral-light bg-surface px-4 text-base text-neutral focus:border-primary"
             placeholder="Enter Phone Number"
-            placeholderTextColor="#8E8E93"
+            placeholderTextColor={colors.neutral.light}
             keyboardType="phone-pad"
             value={phoneNumber}
             onChangeText={(text) => setPhoneNumber(text.replace(/[^0-9]/g, ""))} // Validation: Numbers only

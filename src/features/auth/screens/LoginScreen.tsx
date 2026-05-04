@@ -77,7 +77,7 @@ export default function LoginScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 justify-between bg-white px-6 py-10">
+    <SafeAreaView className="flex-1 justify-between bg-surface px-6 py-10">
       {/* 1. Global Loading Overlay */}
       <LoadingModal visible={isLoading} />
 

@@ -3,6 +3,7 @@ import axios, {
   AxiosInstance,
   AxiosResponse,
   InternalAxiosRequestConfig,
+  isAxiosError,
 } from "axios";
 
 import { useAuthStore } from "@/src/features/auth/stores/auth.store";
@@ -33,7 +34,7 @@ export const apiClient: AxiosInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  timeout: 30000, // Standard timeout: 30 seconds
+  timeout: 10000,
 });
 
 /**
@@ -189,3 +190,54 @@ apiClient.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+
+/**
+ * Fetches all published stories.
+ *
+ * @returns {Promise<Story[]>} A promise that resolves to an array of published stories.
+ */
+export const fetchPublishedStories = async () => {
+  const response = await apiClient.get("/stories/published");
+  return response.data;
+};
+
+/**
+ * Fetches a specific story by ID.
+ *
+ * @param {string} id - The ID of the story.
+ * @returns {Promise<Story>} A promise that resolves to the story.
+ */
+export const fetchStoryById = async (id: string) => {
+  const response = await apiClient.get(`/stories/${id}`);
+  return response.data;
+};
+
+/**
+ * Extracts a readable API error message.
+ *
+ * @param error - Unknown caught error.
+ * @param fallback - Message to use when no API message is available.
+ * @returns User-facing error message.
+ */
+export const getApiErrorMessage = (
+  error: unknown,
+  fallback = "Something went wrong. Please try again.",
+): string => {
+  if (!error) return fallback;
+  if (isAxiosError(error)) {
+    const data = error.response?.data as
+      | { message?: string; error?: string }
+      | undefined;
+    if (typeof data?.message === "string" && data.message.trim()) {
+      return data.message;
+    }
+    if (typeof data?.error === "string" && data.error.trim()) {
+      return data.error;
+    }
+    if (error.message) return error.message;
+  }
+  if (error instanceof Error && error.message) {
+    return error.message;
+  }
+  return fallback;
+};

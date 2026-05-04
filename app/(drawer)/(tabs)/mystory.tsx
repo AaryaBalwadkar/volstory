@@ -1,28 +1,34 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Pressable, View } from "react-native";
+import { router } from "expo-router";
+
+import { colors } from "@/constants/theme";
+import { TabIcon } from "@/src/components/icons/TabIcon";
+import { useAuthStore } from "@/src/features/auth/stores/auth.store";
+import StoriesScreen from "@/src/features/story/screens/StoriesScreen";
 
 /**
- * **My Story Screen (`(tabs)/mystory.tsx`)**
+ * Renders the signed-in user's story feed.
  *
- * This screen acts as the personal content management hub for the logged-in user.
- * It is dedicated to viewing, editing, and managing the user's own submissions.
- *
- * **Intended Functionality:**
- * - List published stories/posts by the current user.
- * - Manage drafts that have not yet been published.
- * - Provide editing and deletion capabilities for existing content.
- *
- * @component
- * @example
- * // Navigate to view personal content
- * router.push('/(tabs)/mystory');
- *
- * @returns {JSX.Element} The rendered screen for managing user stories.
+ * @returns The my story tab screen.
  */
 export default function MyStoryScreen() {
+  const { user } = useAuthStore();
+
   return (
-    <View className="flex-1 items-center justify-center bg-surface">
-      <Text className="text-neutral-gray">My Stories & Drafts</Text>
+    <View className="flex-1">
+      <StoriesScreen authorId={user ? "me" : undefined} />
+      {user?.userId ? (
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="Add new story"
+          accessibilityHint="Opens the create story screen"
+          onPress={() => router.push("/(drawer)/(tabs)/create")}
+          className="absolute bottom-4 right-6 h-16 w-16 items-center justify-center rounded-full bg-surface-yellow shadow-lg"
+        >
+          <TabIcon name="plus" size={48} color={colors.neutral.white} />
+        </Pressable>
+      ) : null}
     </View>
   );
 }

@@ -1,28 +1,12 @@
 import React from "react";
-import { Text, View } from "react-native";
+
+import CreateStoryScreen from "@/src/features/story/screens/CreateStoryScreen";
 
 /**
- * **Create Content Screen (`(tabs)/create.tsx`)**
+ * Renders the create story tab.
  *
- * This screen serves as the primary interface for user content generation.
- * It is typically accessed via the central "Plus" button in the tab bar.
- *
- * **Intended Functionality:**
- * - Allow users to draft new posts or stories.
- * - Provide options for media selection (Camera/Gallery).
- * - Input text content and tags.
- *
- * @component
- * @example
- * // Navigation is handled by the Tab Layout
- * router.push('/(tabs)/create');
- *
- * @returns {JSX.Element} The rendered screen for creating new content.
+ * @returns The create story screen.
  */
 export default function CreateScreen() {
-  return (
-    <View className="flex-1 items-center justify-center bg-surface">
-      <Text className="text-neutral-gray">Create New Post</Text>
-    </View>
-  );
+  return <CreateStoryScreen />;
 }

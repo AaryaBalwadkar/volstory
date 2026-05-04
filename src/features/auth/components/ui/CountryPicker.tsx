@@ -1,9 +1,9 @@
 import React, { memo } from "react";
 import { FlatList, Modal, Text, TouchableOpacity, View } from "react-native";
 
-import { Ionicons } from "@expo/vector-icons";
-
 // Adjust import path based on your project structure (Global vs Feature)
+import { colors } from "@/constants/theme";
+import { TabIcon } from "@/src/components/icons/TabIcon";
 import { ALL_COUNTRIES, Country } from "@/src/features/auth/data/countries";
 
 // --- SUB-COMPONENTS ---
@@ -30,18 +30,13 @@ export const CountrySelectorBtn = ({
     accessibilityRole="button"
     onPress={onPress}
     activeOpacity={0.7}
-    className="mr-3 h-[52px] flex-row items-center rounded-xl border border-neutral-light bg-white px-3"
+    className="mr-3 h-[52px] flex-row items-center rounded-xl border border-neutral-light bg-surface px-3"
   >
     <Text className="mr-2 text-2xl">{selected.flag}</Text>
-    <Text className="text-base font-bold text-neutral-black">
+    <Text className="text-base font-bold text-neutral">
       {selected.dialCode}
     </Text>
-    <Ionicons
-      name="chevron-down"
-      size={14}
-      color="#636366"
-      contentContainerClassName="ml-1.5"
-    />
+    <TabIcon name="chevronDown" size={14} color={colors.neutral.gray} />
   </TouchableOpacity>
 );
 
@@ -63,7 +58,7 @@ export const CountryPickerModal = memo(
     const renderItem = ({ item }: { item: Country }) => (
       <TouchableOpacity
         accessibilityRole="button"
-        className="flex-row items-center border-b border-gray-100 py-4 active:bg-gray-50"
+        className="flex-row items-center border-b border-surface-gray py-4 active:bg-surface-gray"
         onPress={() => {
           onSelect(item);
           onClose();
@@ -71,7 +66,7 @@ export const CountryPickerModal = memo(
       >
         <Text className="mr-4 text-3xl">{item.flag}</Text>
 
-        <Text className="flex-1 text-base font-semibold text-neutral-black">
+        <Text className="flex-1 text-base font-semibold text-neutral">
           {item.name}
         </Text>
 
@@ -87,18 +82,24 @@ export const CountryPickerModal = memo(
         onRequestClose={onClose}
       >
         <View className="flex-1 justify-end bg-black/50">
-          <View className="h-[70%] rounded-t-3xl bg-white p-4">
+          <View className="h-[70%] rounded-t-3xl bg-surface p-4">
             {/* Header */}
-            <View className="mb-2 flex-row items-center justify-between border-b border-gray-100 pb-4">
-              <Text className="text-xl font-bold text-neutral-black">
+            <View className="mb-2 flex-row items-center justify-between border-b border-surface-gray pb-4">
+              <Text className="text-xl font-bold text-neutral">
                 Select Country
               </Text>
               <TouchableOpacity
                 accessibilityRole="button"
+                accessibilityLabel="Close country picker"
+                accessibilityHint="Closes the country selection modal"
                 onPress={onClose}
                 className="p-1"
               >
-                <Ionicons name="close" size={24} color="#1C1C1E" />
+                <TabIcon
+                  name="close"
+                  size={24}
+                  color={colors.neutral.DEFAULT}
+                />
               </TouchableOpacity>
             </View>
 

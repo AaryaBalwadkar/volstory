@@ -1,6 +1,5 @@
 // import React, { useEffect, useState } from "react";
 // import * as ImagePicker from "expo-image-picker";
-// import { Ionicons } from "@expo/vector-icons";
 // import { useAuthStore } from "@/src/features/auth/stores/auth.store";
 // const GENDER_OPTIONS = ["Male", "Female", "Other"];
 // /**
@@ -43,14 +42,14 @@
 //   const ErrorText = ({ field }: { field: string }) => {
 //     if (!validationErrors[field]) return null;
 //     return (
-//       <Text className="ml-1 mt-1 text-xs text-red-500">
+//       <Text className="ml-1 mt-1 text-xs text-error">
 //         {validationErrors[field]}
 //       </Text>
 //     );
 //   };
 //   // Helper for Input Border Color
 //   const getBorderColor = (field: string) =>
-//     validationErrors[field] ? "border-red-500" : "border-neutral-light";
+//     validationErrors[field] ? "border-error" : "border-neutral-light";
 //   return (
 //     <ScrollView
 //       showsVerticalScrollIndicator={false}
@@ -71,7 +70,7 @@
 //           activeOpacity={0.8}
 //         >
 //           <View
-//             className={`h-28 w-28 items-center justify-center overflow-hidden rounded-full border border-dashed bg-gray-100 ${getBorderColor("profileImage")}`}
+//             className={`h-28 w-28 items-center justify-center overflow-hidden rounded-full border border-dashed bg-neutral-lightest ${getBorderColor("profileImage")}`}
 //           >
 //             {registrationData.profileImage ? (
 //               <Image
@@ -80,7 +79,6 @@
 //               />
 //             ) : (
 //               <View className="items-center">
-//                 <Ionicons name="camera" size={32} color="#8E8E93" />
 //                 <Text className="mt-1 text-xs text-neutral-gray">
 //                   Add Photo
 //                 </Text>
@@ -97,7 +95,7 @@
 //             <TextInput
 //               accessibilityLabel="Text input field"
 //               placeholder="First Name"
-//               className={`h-[52px] rounded-lg border bg-white px-4 text-neutral-black ${getBorderColor("firstName")}`}
+//               className={`h-[52px] rounded-lg border bg-surface px-4 text-neutral ${getBorderColor("firstName")}`}
 //               value={registrationData.firstName}
 //               onChangeText={(t) => setRegistrationData({ firstName: t })}
 //             />
@@ -107,7 +105,7 @@
 //             <TextInput
 //               accessibilityLabel="Text input field"
 //               placeholder="Last Name"
-//               className={`h-[52px] rounded-lg border bg-white px-4 text-neutral-black ${getBorderColor("lastName")}`}
+//               className={`h-[52px] rounded-lg border bg-surface px-4 text-neutral ${getBorderColor("lastName")}`}
 //               value={registrationData.lastName}
 //               onChangeText={(t) => setRegistrationData({ lastName: t })}
 //             />
@@ -121,7 +119,7 @@
 //               accessibilityLabel="Text input field"
 //               placeholder="Age"
 //               keyboardType="number-pad"
-//               className={`h-[52px] rounded-lg border bg-white px-4 text-neutral-black ${getBorderColor("age")}`}
+//               className={`h-[52px] rounded-lg border bg-surface px-4 text-neutral ${getBorderColor("age")}`}
 //               value={registrationData.age}
 //               onChangeText={(t) => setRegistrationData({ age: t })}
 //             />
@@ -132,22 +130,21 @@
 //               accessibilityRole="button"
 //               activeOpacity={0.8}
 //               onPress={() => setIsGenderOpen(!isGenderOpen)}
-//               className={`h-[52px] flex-row items-center justify-between rounded-lg border bg-white px-4 ${getBorderColor("gender")}`}
+//               className={`h-[52px] flex-row items-center justify-between rounded-lg border bg-surface px-4 ${getBorderColor("gender")}`}
 //             >
 //               <Text
 //                 className={
 //                   registrationData.gender
-//                     ? "text-neutral-black"
-//                     : "text-gray-400"
+//                     ? "text-neutral"
+//                     : "text-neutral-light"
 //                 }
 //               >
 //                 {registrationData.gender || "Gender"}
 //               </Text>
-//               <Ionicons name="chevron-down" size={16} color="#8E8E93" />
 //             </TouchableOpacity>
 //             <ErrorText field="gender" />
 //             {isGenderOpen && (
-//               <View className="absolute left-0 right-0 top-[56px] z-50 rounded-lg border border-neutral-light bg-white shadow-lg">
+//               <View className="absolute left-0 right-0 top-[56px] z-50 rounded-lg border border-neutral-light bg-surface shadow-lg">
 //                 {GENDER_OPTIONS.map((option) => (
 //                   <TouchableOpacity
 //                     accessibilityRole="button"
@@ -156,9 +153,9 @@
 //                       setRegistrationData({ gender: option });
 //                       setIsGenderOpen(false);
 //                     }}
-//                     className="border-b border-gray-100 px-4 py-3"
+//                     className="border-b border-surface-gray px-4 py-3"
 //                   >
-//                     <Text className="text-neutral-black">{option}</Text>
+//                     <Text className="text-neutral">{option}</Text>
 //                   </TouchableOpacity>
 //                 ))}
 //               </View>
@@ -170,7 +167,7 @@
 //           <TextInput
 //             accessibilityLabel="Text input field"
 //             placeholder="City"
-//             className={`-z-10 h-[52px] rounded-lg border bg-white px-4 text-neutral-black ${getBorderColor("city")}`}
+//             className={`-z-10 h-[52px] rounded-lg border bg-surface px-4 text-neutral ${getBorderColor("city")}`}
 //             value={registrationData.city}
 //             onChangeText={(t) => setRegistrationData({ city: t })}
 //           />
@@ -182,7 +179,7 @@
 //             accessibilityLabel="Text input field"
 //             placeholder="Phone Number"
 //             editable={!isPhoneAuth}
-//             className={`-z-20 h-[52px] rounded-lg border px-4 ${!isPhoneAuth ? "bg-white text-neutral-black" : "bg-gray-100 text-gray-500"} ${getBorderColor("phone")}`}
+//             className={`-z-20 h-[52px] rounded-lg border px-4 ${!isPhoneAuth ? "bg-surface text-neutral" : "bg-neutral-lightest text-neutral-gray"} ${getBorderColor("phone")}`}
 //             value={registrationData.phone}
 //             onChangeText={
 //               !isPhoneAuth
@@ -197,7 +194,7 @@
 //             accessibilityLabel="Text input field"
 //             placeholder="Email"
 //             editable={!isGoogleAuth}
-//             className={`-z-20 h-[52px] rounded-lg border px-4 ${!isGoogleAuth ? "bg-white text-neutral-black" : "bg-gray-100 text-gray-500"} ${getBorderColor("email")}`}
+//             className={`-z-20 h-[52px] rounded-lg border px-4 ${!isGoogleAuth ? "bg-surface text-neutral" : "bg-neutral-lightest text-neutral-gray"} ${getBorderColor("email")}`}
 //             value={registrationData.email}
 //             onChangeText={
 //               !isGoogleAuth
@@ -212,7 +209,7 @@
 //           <TextInput
 //             accessibilityLabel="Text input field"
 //             placeholder="Website (Optional)"
-//             className={`-z-20 h-[52px] rounded-lg border bg-white px-4 text-neutral-black ${getBorderColor("website")}`}
+//             className={`-z-20 h-[52px] rounded-lg border bg-surface px-4 text-neutral ${getBorderColor("website")}`}
 //             value={registrationData.website}
 //             onChangeText={(t) => setRegistrationData({ website: t })}
 //           />
@@ -233,8 +230,8 @@ import {
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 
-import { Ionicons } from "@expo/vector-icons";
-
+import { colors } from "@/constants/theme";
+import { TabIcon } from "@/src/components/icons/TabIcon";
 import { useAuthStore } from "@/src/features/auth/stores/auth.store";
 
 const GENDER_OPTIONS = ["Male", "Female", "Other"];
@@ -303,12 +300,12 @@ export const Step1PersonalDetails = () => {
   };
 
   const getBorderColor = (field: string) =>
-    validationErrors[field] ? "border-red-500" : "border-neutral-light";
+    validationErrors[field] ? "border-error" : "border-neutral-light";
 
   // Refactored to save lines
   const renderError = (field: string) =>
     validationErrors[field] ? (
-      <Text className="ml-1 mt-1 text-xs text-red-500">
+      <Text className="ml-1 mt-1 text-xs text-error">
         {validationErrors[field]}
       </Text>
     ) : null;
@@ -326,8 +323,10 @@ export const Step1PersonalDetails = () => {
         placeholder={placeholder}
         keyboardType={options.keyboard || "default"}
         editable={options.editable !== false}
-        className={`h-[52px] rounded-lg border px-4 text-neutral-black ${
-          options.editable === false ? "bg-gray-100 text-gray-500" : "bg-white"
+        className={`h-[52px] rounded-lg border px-4 text-neutral ${
+          options.editable === false
+            ? "bg-neutral-lightest text-neutral-gray"
+            : "bg-surface"
         } ${getBorderColor(field)}`}
         value={registrationData[field] as string}
         onChangeText={(t) => setRegistrationData({ [field]: t })}
@@ -359,7 +358,7 @@ export const Step1PersonalDetails = () => {
           activeOpacity={0.8}
         >
           <View
-            className={`h-28 w-28 items-center justify-center overflow-hidden rounded-full border border-dashed bg-gray-100 ${getBorderColor("profileImage")}`}
+            className={`h-28 w-28 items-center justify-center overflow-hidden rounded-full border border-dashed bg-neutral-lightest ${getBorderColor("profileImage")}`}
           >
             {registrationData.profileImage ? (
               <Image
@@ -368,7 +367,7 @@ export const Step1PersonalDetails = () => {
               />
             ) : (
               <View className="items-center">
-                <Ionicons name="camera" size={32} color="#8E8E93" />
+                <TabIcon name="camera" size={32} color={colors.neutral.light} />
                 <Text className="mt-1 text-xs text-neutral-gray">
                   Add Photo
                 </Text>
@@ -401,23 +400,27 @@ export const Step1PersonalDetails = () => {
               accessibilityHint="Opens a dropdown to select gender"
               activeOpacity={0.8}
               onPress={() => setIsGenderOpen(!isGenderOpen)}
-              className={`h-[52px] flex-row items-center justify-between rounded-lg border bg-white px-4 ${getBorderColor("gender")}`}
+              className={`h-[52px] flex-row items-center justify-between rounded-lg border bg-surface px-4 ${getBorderColor("gender")}`}
             >
               <Text
                 className={
                   registrationData.gender
-                    ? "text-neutral-black"
-                    : "text-gray-400"
+                    ? "text-neutral"
+                    : "text-neutral-light"
                 }
               >
                 {registrationData.gender || "Gender"}
               </Text>
-              <Ionicons name="chevron-down" size={16} color="#8E8E93" />
+              <TabIcon
+                name="chevronDown"
+                size={16}
+                color={colors.neutral.light}
+              />
             </TouchableOpacity>
             {renderError("gender")}
 
             {isGenderOpen && (
-              <View className="absolute left-0 right-0 top-[56px] z-50 rounded-lg border border-neutral-light bg-white shadow-lg">
+              <View className="absolute left-0 right-0 top-[56px] z-50 rounded-lg border border-neutral-light bg-surface shadow-lg">
                 {GENDER_OPTIONS.map((option) => (
                   <TouchableOpacity
                     accessibilityRole="button"
@@ -428,9 +431,9 @@ export const Step1PersonalDetails = () => {
                       setRegistrationData({ gender: option });
                       setIsGenderOpen(false);
                     }}
-                    className="border-b border-gray-100 px-4 py-3"
+                    className="border-b border-surface-gray px-4 py-3"
                   >
-                    <Text className="text-neutral-black">{option}</Text>
+                    <Text className="text-neutral">{option}</Text>
                   </TouchableOpacity>
                 ))}
               </View>

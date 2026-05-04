@@ -1,6 +1,8 @@
 import React from "react";
 import { ActivityIndicator, Modal, Text, View } from "react-native";
 
+import { colors } from "@/constants/theme";
+
 interface LoadingModalProps {
   visible: boolean;
   message?: string;
@@ -33,8 +35,8 @@ export const LoadingModal = ({
       {/* Darkened Background */}
       <View className="flex-1 items-center justify-center bg-black/40">
         {/* White Card */}
-        <View className="min-w-[150px] items-center rounded-2xl bg-white p-6 shadow-lg">
-          <ActivityIndicator size="large" color="#01A39F" />
+        <View className="min-w-[150px] items-center rounded-2xl bg-surface p-6 shadow-lg">
+          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
           <Text className="mt-4 text-center text-base font-bold">
             {message}
           </Text>

@@ -50,10 +50,10 @@ export const OtpInput = ({ value, onChange, length = 6 }: OtpInputProps) => {
             className={`h-[50px] w-[45px] items-center justify-center rounded-xl border ${
               isFilled || isActive
                 ? "border-primary bg-primary-surface" // Active/Filled State
-                : "border-neutral-light bg-white" // Empty State
+                : "border-neutral-light bg-surface" // Empty State
             }`}
           >
-            <Text className="text-xl font-bold text-neutral-black">
+            <Text className="text-xl font-bold text-neutral">
               {digit || ""}
             </Text>
           </View>

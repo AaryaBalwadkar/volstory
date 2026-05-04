@@ -2,6 +2,8 @@ import React, { useMemo } from "react";
 import { StyleProp, View, ViewStyle } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { colors } from "@/constants/theme";
+
 interface Props {
   children: React.ReactNode;
   bg?: string; // Optional Background Color
@@ -22,12 +24,16 @@ interface Props {
  * @component
  * @param {Props} props - Component properties.
  * @param {React.ReactNode} props.children - The screen content to render.
- * @param {string} [props.bg="#FFFFFF"] - The background color of the screen container. Defaults to White.
+ * @param {string} [props.bg] - The background color of the screen container.
  * @param {StyleProp<ViewStyle>} [props.style] - Optional additional styles to merge with the container.
  *
  * @returns {JSX.Element} A View container with dynamic padding and background color.
  */
-export const ScreenWrapper = ({ children, bg = "#FFFFFF", style }: Props) => {
+export const ScreenWrapper = ({
+  children,
+  bg = colors.surface.DEFAULT,
+  style,
+}: Props) => {
   const insets = useSafeAreaInsets();
 
   // Optimization: Memoize dynamic styles to prevent re-renders and satisfy basic linting

@@ -7,8 +7,8 @@ import {
   View,
 } from "react-native";
 
-import { Ionicons } from "@expo/vector-icons";
-
+import { colors } from "@/constants/theme";
+import { TabIcon } from "@/src/components/icons/TabIcon";
 import { useAuthStore } from "@/src/features/auth/stores/auth.store";
 
 import { SUGGESTED_SKILLS } from "../../data/skills.data";
@@ -69,14 +69,14 @@ export const Step3Skills = () => {
         </Text>
 
         {/* SEARCH BAR */}
-        <View className="mb-2 h-[52px] w-full flex-row items-center rounded-xl border border-neutral-light bg-white px-4">
-          <Ionicons name="search" size={20} color="#8E8E93" />
+        <View className="mb-2 h-[52px] w-full flex-row items-center rounded-xl border border-neutral-light bg-surface px-4">
+          <TabIcon name="search" size={20} color={colors.neutral.light} />
           <TextInput
             accessibilityLabel="Text input field"
             accessibilityHint="Filters the list of available skills below"
-            className="ml-2 flex-1 text-neutral-black"
+            className="ml-2 flex-1 text-neutral"
             placeholder="Search for skills"
-            placeholderTextColor="#8E8E93"
+            placeholderTextColor={colors.neutral.light}
             value={search}
             onChangeText={setSearch}
             autoCapitalize="none"
@@ -84,11 +84,7 @@ export const Step3Skills = () => {
         </View>
 
         <View className="flex-row items-center self-start">
-          <Ionicons
-            name="information-circle-outline"
-            size={16}
-            color="#01A39F"
-          />
+          <TabIcon name="help" size={16} color={colors.primary.DEFAULT} />
           <Text className="ml-1 text-xs text-neutral-gray">
             Tap on a skill to select/remove it
           </Text>
@@ -110,11 +106,11 @@ export const Step3Skills = () => {
                 className={`m-1 rounded-full border px-4 py-2 ${
                   isSelected
                     ? "border-primary bg-primary"
-                    : "border-neutral-light bg-white"
+                    : "border-neutral-light bg-surface"
                 }`}
               >
                 <Text
-                  className={`font-bold ${isSelected ? "text-white" : "text-neutral-gray"}`}
+                  className={`font-bold ${isSelected ? "text-neutral-white" : "text-neutral-gray"}`}
                 >
                   {item}
                 </Text>
@@ -126,7 +122,7 @@ export const Step3Skills = () => {
         {/* Validation Error Message */}
         {validationErrors.skills && (
           <View className="mt-2 items-center">
-            <Text className="text-sm font-medium text-red-500">
+            <Text className="text-sm font-medium text-error">
               {validationErrors.skills}
             </Text>
           </View>

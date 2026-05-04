@@ -75,11 +75,11 @@ export const Step2Interests = () => {
                 className={`m-1 rounded-full border px-4 py-2 ${
                   isSelected
                     ? "border-primary bg-primary"
-                    : "border-primary bg-white"
+                    : "border-primary bg-surface"
                 }`}
               >
                 <Text
-                  className={`font-bold ${isSelected ? "text-white" : "text-primary"}`}
+                  className={`font-bold ${isSelected ? "text-neutral-white" : "text-primary"}`}
                 >
                   {item}
                 </Text>
@@ -92,7 +92,7 @@ export const Step2Interests = () => {
         {/* If the user tries to proceed without selecting, this shows up. */}
         {validationErrors.interests && (
           <View className="mt-2 items-center">
-            <Text className="text-sm font-medium text-red-500">
+            <Text className="text-sm font-medium text-error">
               {validationErrors.interests}
             </Text>
           </View>

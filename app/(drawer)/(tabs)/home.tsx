@@ -21,7 +21,7 @@ import { Text, View } from "react-native";
  */
 export default function HomeScreen() {
   return (
-    <View className="flex-1 items-center justify-center bg-surface">
+    <View className="flex-1 items-center justify-center bg-surface-gray">
       <Text className="text-neutral-gray">Home Feed Content</Text>
     </View>
   );

@@ -1,6 +1,8 @@
 import React from "react";
 import { ActivityIndicator, Image, Text, TouchableOpacity } from "react-native";
 
+import { colors } from "@/constants/theme";
+
 interface GoogleAuthButtonProps {
   /** Function to trigger the Google Sign-In flow */
   onPress: () => void;
@@ -43,12 +45,16 @@ export const GoogleAuthButton = ({
       onPress={onPress}
       disabled={isLoading}
       activeOpacity={0.7}
-      className={`mb-6 h-[52px] w-full max-w-2xl flex-row items-center justify-center rounded-xl border border-primary bg-white ${
-        isLoading ? "opacity-70" : "active:bg-gray-50"
+      className={`mb-6 h-[52px] w-full max-w-2xl flex-row items-center justify-center rounded-xl border border-primary bg-surface ${
+        isLoading ? "opacity-70" : "active:bg-surface-gray"
       }`}
     >
       {isLoading ? (
-        <ActivityIndicator size="small" color="#01A39F" className="mr-3" />
+        <ActivityIndicator
+          size="small"
+          color={colors.primary.DEFAULT}
+          className="mr-3"
+        />
       ) : (
         <Image
           source={require("@/assets/images/google.png")}

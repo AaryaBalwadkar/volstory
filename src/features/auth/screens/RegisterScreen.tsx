@@ -9,8 +9,8 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Ionicons } from "@expo/vector-icons";
-
+import { colors } from "@/constants/theme";
+import { TabIcon } from "@/src/components/icons/TabIcon";
 // --- STEP COMPONENTS ---
 import { Step1PersonalDetails } from "@/src/features/auth/components/registration/Step1PersonalDetails";
 import { Step2Interests } from "@/src/features/auth/components/registration/Step2Interests";
@@ -57,7 +57,7 @@ export default function RegistrationScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <SafeAreaView className="flex-1 bg-surface">
       {/* KeyboardAvoidingView ensures the 'Continue' button pushes up 
         when the keyboard opens on iOS. 
       */}
@@ -72,11 +72,11 @@ export default function RegistrationScreen() {
             <TouchableOpacity
               onPress={handleBack}
               activeOpacity={0.7}
-              className="h-10 w-10 items-center justify-center rounded-full bg-gray-50 active:bg-gray-100"
+              className="h-10 w-10 items-center justify-center rounded-full bg-surface-gray active:bg-neutral-lightest"
               accessibilityLabel="Go back"
               accessibilityHint="Navigates to the previous step"
             >
-              <Ionicons name="arrow-back" size={24} color="#1C1C1E" />
+              <TabIcon name="back" size={24} color={colors.neutral.DEFAULT} />
             </TouchableOpacity>
 
             {/* Step Counter Indicator */}
@@ -99,7 +99,7 @@ export default function RegistrationScreen() {
           </View>
 
           {/* --- BOTTOM ACTION BAR --- */}
-          <View className="bg-white pb-4 pt-2">
+          <View className="bg-surface pb-4 pt-2">
             <TouchableOpacity
               accessibilityRole="button"
               accessibilityHint="Validates current input and proceeds"
@@ -112,10 +112,10 @@ export default function RegistrationScreen() {
             >
               {isSubmitting ? (
                 // Show Loader during API calls
-                <ActivityIndicator color="white" />
+                <ActivityIndicator color={colors.neutral.white} />
               ) : (
                 // Show Text based on context
-                <Text className="text-lg font-bold text-white">
+                <Text className="text-lg font-bold text-neutral-white">
                   {currentStep === totalSteps ? "Finish" : "Continue"}
                 </Text>
               )}

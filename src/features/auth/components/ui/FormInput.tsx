@@ -1,6 +1,8 @@
 import React from "react";
 import { Text, TextInput, TextInputProps, View } from "react-native";
 
+import { colors } from "@/constants/theme";
+
 interface FormInputProps extends TextInputProps {
   /** The value of the input */
   value: string;
@@ -52,13 +54,13 @@ export const FormInput = ({
         placeholder={placeholder}
         value={value}
         onChangeText={onChangeText}
-        className={`h-[52px] w-full rounded-lg border bg-white px-4 text-neutral-black ${
-          error ? "border-red-500" : "border-neutral-light"
+        className={`h-[52px] w-full rounded-lg border bg-surface px-4 text-neutral ${
+          error ? "border-error" : "border-neutral-light"
         }`}
-        placeholderTextColor="#9CA3AF"
+        placeholderTextColor={colors.neutral.light}
         {...props}
       />
-      {error && <Text className="ml-1 mt-1 text-xs text-red-500">{error}</Text>}
+      {error && <Text className="ml-1 mt-1 text-xs text-error">{error}</Text>}
     </View>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import Svg, { Path } from "react-native-svg";
 
+import { colors } from "@/constants/theme";
 import { D_VALUES } from "@/src/data/icons";
 
 interface TabIconProps {
@@ -40,38 +41,45 @@ export const TabIcon = ({
 
   if (!paths) return null;
 
-  // 1. Identify Icon Type
-  const isMenu = name === "menu";
+  const strokeOnlyIcons = new Set<keyof typeof D_VALUES>([
+    "menu",
+    "back",
+    "search",
+    "options",
+    "settings",
+    "person",
+    "chevronForward",
+    "lock",
+    "shield",
+    "language",
+    "help",
+    "document",
+    "logout",
+    "close",
+    "camera",
+    "chevronDown",
+    "checkmark",
+    "edit",
+    "trash",
+  ]);
+  const isStrokeOnly = strokeOnlyIcons.has(name);
   const isCreate = name === "create";
 
   return (
     <Svg width={size} height={size} viewBox="0 0 28 28" fill="none">
       {paths.map((d, index) => {
-        // --- COLOR LOGIC START ---
+        let strokeColor = isStrokeOnly ? color : focused ? "none" : color;
+        let fillColor = isStrokeOnly ? "none" : focused ? color : "none";
 
-        // A. STROKE COLOR (Outline)
-        // If it's Menu: Always stroke with color.
-        // If it's Others: Stroke ONLY when inactive (to show outline).
-        let strokeColor = isMenu ? color : focused ? "none" : color;
-
-        // B. FILL COLOR (Body)
-        // If it's Menu: Never fill.
-        // If it's Others: Fill ONLY when focused (Active).
-        let fillColor = isMenu ? "none" : focused ? color : "none";
-
-        // C. SPECIAL CASE: Create Button (Plus Sign)
-        // The Plus sign is the 2nd path (index 1) of the 'create' icon.
         if (isCreate && index === 1) {
           if (focused) {
-            fillColor = "#FFFFFF"; // Active: White Plus on Teal Box
+            fillColor = colors.neutral.white;
             strokeColor = "none";
           } else {
-            fillColor = "none"; // Inactive: Hollow Plus
-            strokeColor = color; // Gray Outline
+            fillColor = "none";
+            strokeColor = color;
           }
         }
-
-        // --- COLOR LOGIC END ---
 
         return (
           <Path

@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Image, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { Ionicons } from "@expo/vector-icons";
 import {
   DrawerContentComponentProps,
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
 
+import { colors } from "@/constants/theme";
+import { TabIcon } from "@/src/components/icons/TabIcon";
 import { useAuthStore } from "@/src/features/auth/stores/auth.store";
 
 /**
@@ -30,6 +31,10 @@ import { useAuthStore } from "@/src/features/auth/stores/auth.store";
 export default function CustomSidebar(props: DrawerContentComponentProps) {
   const { user } = useAuthStore();
   const insets = useSafeAreaInsets();
+  const headerStyle = useMemo(
+    () => ({ paddingTop: insets.top + 20 }),
+    [insets.top],
+  );
 
   return (
     <View className="flex-1 bg-primary">
@@ -37,31 +42,31 @@ export default function CustomSidebar(props: DrawerContentComponentProps) {
       <View
         className="bg-primary px-4 pb-8"
         // DYNAMIC TOP PADDING: Text starts exactly below Status Bar
-        style={{ paddingTop: insets.top + 20 }}
+        style={headerStyle}
       >
         {/* Profile Image */}
-        <View className="mb-3 h-20 w-20 items-center justify-center overflow-hidden rounded-full border-2 border-white bg-white/20">
+        <View className="mb-3 h-20 w-20 items-center justify-center overflow-hidden rounded-full border-2 border-neutral-white bg-surface/20">
           {user?.profileImageUrl ? (
             <Image
               source={{ uri: user.profileImageUrl }}
               className="h-full w-full"
             />
           ) : (
-            <Ionicons name="person" size={40} color="white" />
+            <TabIcon name="person" size={40} color={colors.neutral.white} />
           )}
         </View>
 
         {/* User Info */}
-        <Text className="font-nunito-bold text-lg text-white">
+        <Text className="font-nunito-bold text-lg text-neutral-white">
           {user?.name || "Volstory User"}
         </Text>
-        <Text className="font-nunito text-sm text-white/80">
+        <Text className="font-nunito text-sm text-neutral-white/80">
           {user?.email || "user@volstory.com"}
         </Text>
       </View>
 
       {/* 2. DRAWER ITEMS (The List) */}
-      <View className="flex-1 bg-white">
+      <View className="flex-1 bg-surface">
         {/* ^^^ Reset BG to white for the list */}
         <DrawerContentScrollView {...props} contentContainerClassName="pt-2.5">
           <DrawerItemList {...props} />
