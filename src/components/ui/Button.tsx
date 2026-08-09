@@ -1,6 +1,8 @@
 import React from "react";
 import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
 
+import { colors } from "@/constants/theme";
+
 /**
  * Defines the variants for the button style.
  * - `primary`: Filled teal background (Standard).
@@ -89,7 +91,13 @@ export const Button = ({
       className={`${baseStyles} ${variants[variant]} ${className}`}
     >
       {loading ? (
-        <ActivityIndicator color={variant === "primary" ? "#fff" : "#01A39F"} />
+        <ActivityIndicator
+          color={
+            variant === "primary"
+              ? colors.neutral.white
+              : colors.primary.DEFAULT
+          }
+        />
       ) : (
         <Text className={`text-lg font-bold ${textColors[variant]}`}>
           {title}

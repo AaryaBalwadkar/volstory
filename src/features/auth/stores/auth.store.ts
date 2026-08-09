@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 import { clientStorage } from "@/src/lib/storage";
+import { useSessionStore } from "@/src/stores/session.store";
 
 import { AuthState, User } from "../types"; // ✅ Imported from Types folder
 
@@ -57,6 +58,9 @@ export const useAuthStore = create<AuthState>((set) => ({
 
     // State Update
     set({ user, isAuthenticated: true });
+
+    // Sync to session store so arya_vol features (stories, profile, groups, etc.) work
+    useSessionStore.getState().login(user as any);
   },
 
   /**
@@ -93,6 +97,9 @@ export const useAuthStore = create<AuthState>((set) => ({
         skills: [],
       },
     });
+
+    // Sync logout to session store
+    useSessionStore.getState().logout();
   },
 
   /**

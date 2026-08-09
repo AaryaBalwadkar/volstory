@@ -30,7 +30,10 @@ export interface GoogleUserResult {
  */
 export interface User {
   /** The unique System ID (Database Primary Key), distinct from Firebase UID. */
-  userId: string;
+  id: string;
+
+  /** @deprecated Use `id`. Kept for backward compatibility with registration API responses. */
+  userId?: string;
 
   /** The user's full legal name. */
   name: string;

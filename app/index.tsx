@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { Image, StatusBar, Text, View } from "react-native";
 import { useRouter } from "expo-router";
 
-// Using icon as placeholder for Logo
-import { useAuthStore } from "@/src/features/auth/stores/auth.store";
+import { colors } from "@/constants/theme";
+import { useSessionStore } from "@/src/stores/session.store";
 
 /**
  * **Splash Screen (`app/index.tsx`)**
@@ -22,7 +22,7 @@ import { useAuthStore } from "@/src/features/auth/stores/auth.store";
  */
 export default function SplashScreen() {
   const router = useRouter();
-  const { user } = useAuthStore(); // Check if user exists in state
+  const { user } = useSessionStore(); // Check if user exists in state
 
   useEffect(() => {
     // Define logic INSIDE to satisfy linter dependencies
@@ -44,7 +44,10 @@ export default function SplashScreen() {
 
   return (
     <View className="flex-1 items-center justify-center bg-primary pb-48">
-      <StatusBar barStyle="light-content" backgroundColor="#01A39F" />
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={colors.primary.DEFAULT}
+      />
 
       {/* Logo Section */}
       <View className="flex-1 items-center justify-center">
@@ -53,7 +56,7 @@ export default function SplashScreen() {
           className="mb-8 h-48 w-48"
           resizeMode="contain"
         />
-        <Text className="font-nunito-bold text-4xl tracking-wider text-white">
+        <Text className="font-nunito-bold text-4xl tracking-wider text-neutral-white">
           VolStory
         </Text>
       </View>

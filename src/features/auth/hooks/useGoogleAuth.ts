@@ -145,6 +145,7 @@ export const useGoogleAuth = () => {
       // User clicked "Login" AND they are Existing (Has Phone).
       // Action: Log them in.
       const user: User = {
+        id: googleUser.uid,
         userId: googleUser.uid,
         name: googleUser.displayName || "User",
         email: googleUser.email,

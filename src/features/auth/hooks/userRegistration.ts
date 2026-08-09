@@ -256,6 +256,7 @@ export const useRegistration = () => {
       const currentAccessToken = clientStorage.getItem("access_token") || "";
 
       const newUserSession: User = {
+        id: response.userId || "generated-by-backend",
         userId: response.userId || "generated-by-backend",
         name: payload.name,
         email: payload.email,
